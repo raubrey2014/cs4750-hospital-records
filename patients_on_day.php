@@ -1,14 +1,19 @@
 <!DOCTYPEhtml>
 <html>
-<head>
-</head>
-<body>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
+		<link rel="stylesheet" type="text/css" href="hospital.css" />
+	</head>
+	<body>
+		<script>
+			webshim.polyfill('forms forms-ext');
+		</script>
 <h1>Patients Visited on Date</h1>
 
 <form>
 	<input type='hidden' name='SUBMIT' value='1' />
-	Date: <input type='text' name='DATE' />
-	<br />
+	Date: <input type='date' name='DATE' value='<?php echo $_REQUEST['DATE'] ?>' />
 	<input type='submit' />
 </form>
 
@@ -26,24 +31,26 @@ if ($conn->connect_error) {
 else if ($_REQUEST['SUBMIT']) {
 	//diagnosis, diagnosis treatment, Patient, Patient Visit, 
 	//Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
-	$sql = "SELECT SSN, Name, DOB, Email, `Phone Number`, Address FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit WHERE Date = STR_TO_DATE(?, '%m/%d/%Y')";
+	$sql = "SELECT SSN, Name, DATE_FORMAT(DOB, '%m/%d/%Y'), Email, `Phone Number`, Address FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit WHERE Date = STR_TO_DATE(?, '%Y-%m-%d')";
         $stmt = $conn->prepare($sql);
 	$stmt->bind_param('s', $day);
 	$stmt->execute();
 	$stmt->bind_result($ssn, $name, $dob, $email, $phone, $address);
 
-	echo "******************************";
+	echo "<br />";
+	echo "<table class='result-list' cellspacing='5px'>";
+	echo "<tr><th>SSN</th><th>Name</th><th>Date of Birth</th><th>Email</th><th>Phone Number</th><th>Address</th></tr>";
 	while ($stmt->fetch()) {
-		echo "<table>";
-		echo "<tr><td style='text-align: right;'>SSN:</td><td>" . $ssn . "</td></tr>";
-		echo "<tr><td style='text-align: right;'>Name:</td><td>" . $name . "</td></tr>";
-		echo "<tr><td style='text-align: right;'>Date of Birth:</td><td>" . $dob . "</td></tr>";
-		echo "<tr><td style='text-align: right;'>Email:</td><td>" . $email . "</td></tr>";
-		echo "<tr><td style='text-align: right;'>Phone Number:</td><td>" . $phone . "</td></tr>";
-		echo "<tr><td style='text-align: right;'>Address:</td><td>" . $address . "</td></tr>";
-		echo "</table>";
-		echo "******************************";
+		echo "<tr>";
+		echo "<td>" . $ssn . "</td>";
+		echo "<td>" . $name . "</td>";
+		echo "<td>" . $dob . "</td>";
+		echo "<td>" . $email . "</td>";
+		echo "<td>" . $phone . "</td>";
+		echo "<td>" . $address . "</td>";
+		echo "</tr>";
 	}
+	echo "</table>";
 }
 ?>
 <br />

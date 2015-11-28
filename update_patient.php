@@ -2,8 +2,14 @@
 <html>
 	<head>
 		<title>Update Patient</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
+		<link rel="stylesheet" type="text/css" href="hospital.css" />
 	</head>
 	<body>
+		<script>
+			webshim.polyfill('forms forms-ext');
+		</script>
 		<h1>Update Patient</h1>
 <?php
 
@@ -24,7 +30,7 @@ if ($conn->connect_error) {
 else if ($_REQUEST['SUBMIT']) {
 	//diagnosis, diagnosis treatment, Patient, Patient Visit, 
 	//Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
-	$sql = "UPDATE Patient SET Name = ?, DOB = STR_TO_DATE(?, '%m/%d/%Y'), Email = ?, `Phone Number` = ?, Address = ? WHERE SSN = ?";
+	$sql = "UPDATE Patient SET Name = ?, DOB = STR_TO_DATE(?, '%Y-%m-%d'), Email = ?, `Phone Number` = ?, Address = ? WHERE SSN = ?";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('sssssd', $name, $dob, $email, $phone, $address, $ssn);
 	if ($stmt->execute()) {
@@ -34,7 +40,7 @@ else if ($_REQUEST['SUBMIT']) {
 	}
 }
 
-$sql = "SELECT Name, DATE_FORMAT(DOB, '%m/%d/%Y'), Email, `Phone Number`, Address FROM Patient WHERE SSN = ?";
+$sql = "SELECT Name, DATE_FORMAT(DOB, '%Y-%m-%d'), Email, `Phone Number`, Address FROM Patient WHERE SSN = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('d', $ssn);
 $stmt->execute();
@@ -57,7 +63,7 @@ $conn->close();
 		</tr>
 		<tr>
 			<td style='text-align: right'>Date of Birth:</td>
-			<td><input type='text' name='DOB' value='<?php echo "$dob" ?>' /></td>
+			<td><input type='date' name='DOB' value='<?php echo "$dob" ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Email:</td>

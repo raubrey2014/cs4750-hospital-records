@@ -2,9 +2,14 @@
 <html>
 	<head>
 		<title>Add Visit</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
+		<link rel="stylesheet" type="text/css" href="hospital.css" />
 	</head>
 	<body>
-		<h1>Add Visit</h1>
+		<script>
+			webshim.polyfill('forms forms-ext');
+		</script>
 <?php
 
 $id = $_REQUEST['VISITID'];
@@ -19,7 +24,7 @@ if ($conn->connect_error) {
 
 }
 else if ($_REQUEST['SUBMIT']) {
-	$sql = "INSERT INTO Visit (`Visit ID`, Date) VALUES (?, STR_TO_DATE(?, '%m/%d/%Y'));";
+	$sql = "INSERT INTO Visit (`Visit ID`, Date) VALUES (?, STR_TO_DATE(?, '%Y-%m-%d'));";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('ds', $id, $date);
 	if ($stmt->execute()) {
@@ -28,7 +33,10 @@ else if ($_REQUEST['SUBMIT']) {
 		$stmt->bind_param('dd', $ssn, $id);
 		
 		if ($stmt->execute()) {
+			$encid = urlencode($id);
 			echo "<h2>Visit added successfully</h2>";
+			echo "<a href='add_visit_physician.php?VISITID=$encid'>Add physician to visit</a>";
+			echo "<br />";
 		} else {
 			echo "<h2>Failed to add patient to visit: " . $conn->error . "</h2>";
 		}
@@ -40,6 +48,7 @@ else if ($_REQUEST['SUBMIT']) {
 $conn->close();
 ?>
 
+<h1>Add Visit</h1>
 <form>
 	<input type='hidden' name='SUBMIT' value='1' />
 	<table>
@@ -49,7 +58,7 @@ $conn->close();
 		</tr>
 		<tr>
 			<td style='text-align: right'>Date:</td>
-			<td><input type='text' name='DATE' /></td>
+			<td><input type='date' name='DATE' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Visit ID:</td>

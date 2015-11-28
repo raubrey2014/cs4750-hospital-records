@@ -4,7 +4,6 @@
 		<title>Add Visit</title>
 	</head>
 	<body>
-		<h1>Add Visit</h1>
 <?php
 
 $visitid = $_REQUEST['VISITID'];
@@ -31,16 +30,17 @@ else if ($_REQUEST['SUBMIT']) {
 $conn->close();
 ?>
 
+<h1>Add Physician to Visit</h1>
 <form>
 	<input type='hidden' name='SUBMIT' value='1' />
 	<table>
 		<tr>
 			<td style='text-align: right'>Physician ID:</td>
-			<td><input type='text' name='PHYSICIANID' /></td>
+			<td><input type='text' name='PHYSICIANID' value='<?php echo "$physicianid" ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Visit ID:</td>
-			<td><input type='text' name='VISITID' /></td>
+			<td><input type='text' name='VISITID' value='<?php echo "$visitid" ?>' /></td>
 		</tr>
 	</table>
 	<input type='submit' />
