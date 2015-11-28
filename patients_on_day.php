@@ -9,6 +9,7 @@
 		<script>
 			webshim.polyfill('forms forms-ext');
 		</script>
+<div class='content'>
 <h1>Patients Visited on Date</h1>
 
 <form>
@@ -57,5 +58,6 @@ else if ($_REQUEST['SUBMIT']) {
 <a href='index.html'>
 	Back
 </a>
+</div>
 </body>
 </html>

@@ -9,12 +9,12 @@
 	<input type='hidden' name='SUBMIT' value='1' />
 	<table>
 		<tr>
-			<td>Diagnosis</td>
-			<td><input type='text' name='DIAG' /></td>
+			<td>Diagnosis: </td>
+			<td><input type='text' name='DIAG' value='<?php echo $_REQUEST['DIAG']; ?>' /></td>
 		</tr>
 		<tr>
-			<td>Treatment</td>
-			<td><input type='text' name='TREAT' /></td>
+			<td>Treatment: </td>
+			<td><input type='text' name='TREAT' value='<?php echo $_REQUEST['TREAT']; ?>' /></td>
 		</tr>
 	</table>
 	<input type='submit' />
@@ -42,18 +42,17 @@ else if ($_REQUEST['SUBMIT']) {
 	$stmt->execute();
 	$stmt->bind_result($total, $relevant);
 
-	echo "******************************";
-	while ($stmt->fetch()) {
-		echo "<br>";
+	echo "<br />";
+	if ($stmt->fetch()) {
 		if ($total === 0) {
 			echo "No information about diagnosis";
 		} else {
-			$relevant += 0;
-			echo "$relevant time(s) / $total visit(s) = " . (100 * $relevant / $total) . "%";
+			printf("%d time(s) / %d visit(s) = %.2f%%", $relevant, $total, 100 * $relevant / $total); 
 		}
-		echo "<br>";
-		echo "******************************";
+	} else {
+		echo "<h2>Error retreiving information</h2>";
 	}
+	echo "<br />";
 }
 ?>
 <br />

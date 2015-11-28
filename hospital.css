@@ -1,5 +1,23 @@
+body {
+	font-family: sans-serif;
+	background-color: #8b9ba7;
+}
+
+h1 {
+	color: #FFFFFF;
+	background-color: #3e779f;
+	padding: 5px;
+}
+
+div.content {
+	display: table;
+	margin: 0 auto;
+	padding: 30px;
+	background-color: #FFFFFF;
+	border: 1px solid black;
+}
+
 table.result-list {
-	border: 2px solid black;
 	text-align: left;
 	border-collapse: collapse;
 }
@@ -8,6 +26,15 @@ table.result-list th {
 	border-bottom: 1px solid black;
 }
 
-table.result-list td,th {
-	padding-right: 10px;
+table.result-list tr:nth-child(odd) {
+	background-color: #F8F8F8;
+}
+
+table.result-list tr:nth-child(even) {
+	background-color: #E0E0E0;
+}
+
+table.result-list td, table.result-list th {
+	font-family: sans-serif;
+	padding: 10px;
 }
