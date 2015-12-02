@@ -1,9 +1,11 @@
 <!DOCTYPEhtml>
 <html>
 <head>
+		<link rel="stylesheet" type="text/css" href="hospital.css" />
 </head>
 <body>
-<h1>CS4750</h1>
+<div class='content'>
+<h1>Physicians</h1>
 <?php
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
@@ -18,15 +20,19 @@ else {
 	//Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
 	$sql = "SELECT * FROM Physician WHERE 1";
         $result = $conn->query($sql);
-	echo "******************************";
 
+	echo "<table class='result-list'>";
+	echo "<tr><th>Physician ID</th><th>Salary</th><th>Name</th><th>Specialization</th></tr>"; 
 	while ($row = $result->fetch_assoc()):
-		foreach($row as $key=>$value):
-			echo "<p>$key => $value</p>";
-		endforeach;
-		echo "******************************";
+		echo "<tr>";
+		echo "<td>" . $row['Physician ID'] . "</td>";
+		echo "<td>" . $row['Salary'] . "</td>";
+		echo "<td>" . $row['Name'] . "</td>";
+		echo "<td>" . $row['Specialization'] . "</td>";
+		echo "</tr>";
 	endwhile;
 }
 ?>
+</div>
 </body>
 </html>

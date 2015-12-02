@@ -36,7 +36,7 @@ $conn->close();
 	<table>
 		<tr>
 			<td style='text-align: right'>Physician ID:</td>
-			<td><input type='text' name='ID' /></td>
+			<td><input type='text' name='ID' value='<?php echo $id; ?>' /></td>
 		</tr>
 	</table>
 	<input type='submit' />

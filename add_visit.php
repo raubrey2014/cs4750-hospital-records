@@ -54,15 +54,15 @@ $conn->close();
 	<table>
 		<tr>
 			<td style='text-align: right'>SSN:</td>
-			<td><input type='text' name='SSN' /></td>
+			<td><input type='text' name='SSN' value='<?php echo $ssn; ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Date:</td>
-			<td><input type='date' name='DATE' /></td>
+			<td><input type='date' name='DATE' value='<?php echo $date; ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Visit ID:</td>
-			<td><input type='text' name='VISITID' /></td>
+			<td><input type='text' name='VISITID' value='<?php echo $id; ?>' /></td>
 		</tr>
 	</table>
 	<input type='submit' />

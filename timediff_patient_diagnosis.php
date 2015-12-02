@@ -9,12 +9,12 @@
 	<input type='hidden' name='SUBMIT' value='1' />
 	<table>
 		<tr>
-			<td>Patient SSN</td>
-			<td><input type='text' name='SSN' /></td>
+			<td>Patient SSN: </td>
+			<td><input type='text' name='SSN' value='<?php echo $_REQUEST["SSN"]; ?>' /></td>
 		</tr>
 		<tr>
-			<td>Diagnosis</td>
-			<td><input type='text' name='DIAG' /></td>
+			<td>Diagnosis: </td>
+			<td><input type='text' name='DIAG' value='<?php echo $_REQUEST["DIAG"]; ?>' /></td>
 		</tr>
 	</table>
 	<input type='submit' />

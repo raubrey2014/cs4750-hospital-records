@@ -48,27 +48,27 @@ $conn->close();
 	<table>
 		<tr>
 			<td style='text-align: right'>SSN:</td>
-			<td><input type='text' name='SSN' /></td>
+			<td><input type='text' name='SSN' value='<?php echo $ssn; ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Name:</td>
-			<td><input type='text' name='NAME' /></td>
+			<td><input type='text' name='NAME' value='<?php echo $name; ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Date of Birth:</td>
-			<td><input type='date' name='DOB' /></td>
+			<td><input type='date' name='DOB' value='<?php echo $dob; ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Email:</td>
-			<td><input type='text' name='EMAIL' /></td>
+			<td><input type='text' name='EMAIL' value='<?php echo $email; ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Phone:</td>
-			<td><input type='text' name='PHONE' /></td>
+			<td><input type='text' name='PHONE' value='<?php echo $phone; ?>' /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Address:</td>
-			<td><input type='text' name='ADDRESS' /></td>
+			<td><input type='text' name='ADDRESS' value='<?php echo $address; ?>' /></td>
 		</tr>
 	</table>
 	<input type='submit' />
