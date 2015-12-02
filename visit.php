@@ -7,13 +7,13 @@
 <hr>
 <p>What would you like to do?</p>
 
-<form action='visit.php' method='POST' id='queryForm'>
-<input type='submit' value='Query' name='Submit'/>
-</form>
 <select name='Actions' form='queryForm'>
 	<option>View My Visits</option>
 	<option name='specialization'>See the specialist on my visits</option>
 </select>
+<form action='visit.php' method='POST' id='queryForm'>
+<input type='submit' value='Submit' name='Submit'/>
+</form>
 
 <br />
 
