@@ -109,8 +109,6 @@ function specialization($number){
                 echo "There were no Physicians involved in this visit.";
             }
         }
-        
-
 
 }
 
