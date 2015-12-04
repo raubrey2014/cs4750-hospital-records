@@ -1,3 +1,8 @@
+<?php 
+session_start();
+include 'login.php';
+validate_creds();
+?>
 <!DOCTYPEhtml>
 <html>
 	<head>
