@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include 'login.php';
 validate_creds();
 ?>
@@ -11,7 +10,7 @@ validate_creds();
 
 </head>
 <body>
-<h1>Medical Records</h1>
+<h1>Admin Portal</h1>
 <a href="connect.php">View Patients</a>
 <br />
 <a href="physicians.php">View Physicians</a>

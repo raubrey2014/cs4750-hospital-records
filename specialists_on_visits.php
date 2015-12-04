@@ -1,3 +1,7 @@
+<?php 
+include 'login.php';
+validate_creds();
+?>
 <!DOCTYPEhtml>
 <html>
         <head>
@@ -14,35 +18,39 @@
 <form>
         <input type='hidden' name='SUBMIT' value='1' />
         Date of visit: <input type='date' name='DATE' value='<?php echo $_REQUEST['DATE'] ?>' />
-        Patient SSN: <input type='text' name='PATIENT_SSN' value='Example' />
+        <!-- Patient SSN: <input type='text' name='PATIENT_SSN' value='Example' /> -->
+        <?php
+        $sql = "SELECT * FROM Patient";
+        $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
+        if ($conn->connect_error) {
+
+         die("Connection failed: " . $conn->connect_error);
+
+        }
+        else{
+            $result = $conn->query($sql);
+            echo "<select name='PATIENT_SSN'>";
+            while ($row = $result->fetch_assoc()) {
+                echo "<option value='" . $row['SSN'] . "'>" . "SSN: ". $row['SSN'] . ", Name: ". $row['Name'] . "</option>";
+            }
+            echo "</select>";
+        }
+        ?>
 	<input type='submit' />
 </form>
 
 <?php
 
-$day = $_REQUEST['DATE'];
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
 
 if ($conn->connect_error) {
-
          die("Connection failed: " . $conn->connect_error);
-
 }
-else if ($_REQUEST['SUBMIT']) {
-
-	// specialization(1);
-
-        //diagnosis, diagnosis treatment, Patient, Patient Visit, 
-        //Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
+else if (isset($_REQUEST['SUBMIT'])) {
+ 
     	$x = $_REQUEST['PATIENT_SSN'];
-        echo $x;
     	$y = $_REQUEST['DATE'];
-        echo $y;
-        // AND  Date = STR_TO_DATE($day, '%Y-%m-%d')"
-        // NATURAL JOIN Visit
-        //Patient NATURAL JOIN 
-        // WHERE SSN =`$x`
         $init = "SELECT count(*) as initCount FROM `Patient Visit` NATURAL JOIN Patient NATURAL JOIN Visit WHERE SSN = $x AND Date = STR_TO_DATE('$y', '%Y-%m-%d')";
         $result = $conn->query($init);
         $number_of_visits = $result->fetch_assoc()['initCount'];
@@ -115,7 +123,7 @@ function specialization($number){
 ?>
 <br />
 
-<a href='index.html'>
+<a href='admin_main.php'>
         Back
 </a>
 </body>

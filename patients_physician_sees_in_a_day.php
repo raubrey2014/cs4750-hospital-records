@@ -1,3 +1,7 @@
+<?php 
+include 'login.php';
+validate_creds();
+?>
 <!DOCTYPEhtml>
 <html>
         <head>
@@ -45,12 +49,12 @@ if ($conn->connect_error) {
          die("Connection failed: " . $conn->connect_error);
 
 }
-else if ($_REQUEST['SUBMIT']) {
+else if (isset($_REQUEST['SUBMIT'])) {
         $day = $_REQUEST['DATE'];
         $physician = $_REQUEST['PhysicianName'];
         $sql = "SELECT * from Physician WHERE `Physician ID` = '$physician'";
         $name = $conn->query($sql)->fetch_assoc()['Name'];
-        echo $day ." ".$name;
+        // echo $day ." ".$name;
         echo "<h1>Results for $name on $day</h1>";
 
         echo "<table class='result-list' cellspacing='5px'>";
@@ -68,14 +72,14 @@ else if ($_REQUEST['SUBMIT']) {
         echo "</table>";
         $init = "SELECT count(`Visit ID`) as initCount FROM `Physician Visit` NATURAL JOIN Visit WHERE `Physician ID` = '$physician' AND Date = STR_TO_DATE('$day', '%Y-%m-%d')" ;
         $count = $conn->query($init)->fetch_assoc()['initCount'];
-        echo "<h3>$name saw a total of $count patients on $day</h3>";
+        echo "<h3>$name saw a total of $count patients on $day.</h3>";
 }
 
 
 ?>
 <br />
 
-<a href='index.html'>
+<a href='admin_main.php'>
         Back
 </a>
 </body>

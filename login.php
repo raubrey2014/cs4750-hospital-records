@@ -3,14 +3,45 @@ session_start();
 
 
 if (isset($_REQUEST['username']) && isset($_REQUEST['password'])){
-  	check_login();
+  	check_user_login();
 }
-
+if (isset($_REQUEST['admin_username']) && isset($_REQUEST['admin_password'])){
+  	check_admin_login();
+}
 if (isset($_POST["logout"])) {
 	logout();		
 }
+function check_admin_login(){
+	$username = $_REQUEST['admin_username'];
+  	$password = $_REQUEST['admin_password'];
+  	$conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
+    if ($conn->connect_error) {
+    	die("Connection failed: " . $conn->connect_error);
+    }
+    else{
+  		$sql = "SELECT * from AdminUser WHERE admin_username='$username' AND admin_password='$password'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0){
+        	while($row = $result->fetch_assoc()):
+	  			$_SESSION['current_user'] = $username;
+	  				######################################NEED TO CHANGE FOR WHAT YOU USE############
+	  			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
+	        	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/admin_main.php");
+	   			exit();
+	   		endwhile;
+        } else {
+        		######################################NEED TO CHANGE FOR WHAT YOU USE############
+  			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
+        	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/");
+   			exit();
 
-function check_login(){
+        }
+    }
+   	######################################NEED TO CHANGE FOR WHAT YOU USE############
+   	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
+   	
+}
+function check_user_login(){
 	$username = $_REQUEST['username'];
   	$password = $_REQUEST['password'];
   	$conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
@@ -18,14 +49,14 @@ function check_login(){
     	die("Connection failed: " . $conn->connect_error);
     }
     else{
-  		$sql = "SELECT * from User WHERE Username='$username' AND Password='$password'";
+  		$sql = "SELECT * from PatientUser WHERE Username='$username' AND Password='$password'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0){
         	while($row = $result->fetch_assoc()):
 	  			$_SESSION['current_user'] = $username;
 	  				######################################NEED TO CHANGE FOR WHAT YOU USE############
 	  			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
-	        	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/main.php");
+	        	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/user_main.php");
 	   			exit();
 	   		endwhile;
         } else {

@@ -16,7 +16,7 @@
     <h1>Hospital Visit Database</h1>
     <hr>
       <form class="form-signin" method="POST" action="login.php">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">User Sign In</h2>
         <label for="inputEmail" class="sr-only">Username</label>
         <input id="inputUsername" class="form-control" placeholder="Username" required autofocus name='username'>
         <label for="inputPassword" class="sr-only">Password</label>
@@ -24,7 +24,16 @@
         
         <input class="btn btn-lg btn-primary btn-block" type="submit">	</input>
       </form>
-
+      <hr>
+    <form class="form-signin" method="POST" action="login.php">
+        <h2 class="form-signin-heading">Admin Sign In</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input id="inputUsername" class="form-control" placeholder="Username" required autofocus name='admin_username'>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name='admin_password'>
+        
+        <input class="btn btn-lg btn-primary btn-block" type="submit">  </input>
+      </form>
     </div>
 
    
