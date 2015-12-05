@@ -12,18 +12,12 @@ if (is_admin()) {
 		</script>
 			<h1>Update Patient</h1>
 <?php
-
 if (is_admin()) {
-	$ssn = $_REQUEST['SSN'];
-} else {
-	$ssn = $_SESSION['current_ssn'];
+		$ssn = $_REQUEST['SSN'];
+	} else {
+		$ssn = $_SESSION['current_ssn'];
 }
 
-$name = $_REQUEST['NAME'];
-$dob = $_REQUEST['DOB'];
-$email = $_REQUEST['EMAIL'];
-$phone = $_REQUEST['PHONE'];
-$address = $_REQUEST['ADDRESS'];
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
 
@@ -32,7 +26,15 @@ if ($conn->connect_error) {
          die("Connection failed: " . $conn->connect_error);
 
 }
-else if ($_REQUEST['SUBMIT']) {
+else if (isset($_REQUEST['SUBMIT'])) {
+
+	
+
+	$name = $_REQUEST['NAME'];
+	$dob = $_REQUEST['DOB'];
+	$email = $_REQUEST['EMAIL'];
+	$phone = $_REQUEST['PHONE'];
+	$address = $_REQUEST['ADDRESS'];
 	//diagnosis, diagnosis treatment, Patient, Patient Visit, 
 	//Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
 	$sql = "UPDATE Patient SET Name = ?, DOB = STR_TO_DATE(?, '%Y-%m-%d'), Email = ?, `Phone Number` = ?, Address = ? WHERE SSN = ?";
