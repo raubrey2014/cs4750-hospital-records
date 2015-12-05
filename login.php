@@ -8,7 +8,7 @@ if (isset($_REQUEST['username']) && isset($_REQUEST['password'])){
 if (isset($_REQUEST['admin_username']) && isset($_REQUEST['admin_password'])){
   	check_admin_login();
 }
-if (isset($_POST["logout"])) {
+if (isset($_REQUEST["logout"])) {
 	logout();		
 }
 function check_admin_login(){
