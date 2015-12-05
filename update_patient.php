@@ -14,7 +14,8 @@ validate_creds();
 		<script>
 			webshim.polyfill('forms forms-ext');
 		</script>
-		<h1>Update Patient</h1>
+		<div class='content'>
+			<h1>Update Patient</h1>
 <?php
 
 if (is_admin()) {
@@ -98,5 +99,6 @@ if (is_admin()) {
 }
 ?>
 
-</body>
+		</div>
+	</body>
 </html>

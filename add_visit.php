@@ -26,22 +26,29 @@ $date = $_REQUEST['DATE'];
 
 ?>
 
-<h1>Schedule Visit</h1>
-<form>
-	<input type='hidden' name='SUBMIT' value='1' />
-	<table>
-		<tr>
-			<td style='text-align: right'>SSN:</td>
-			<td><input type='text' name='SSN' value='<?php echo $ssn; ?>' /></td>
-		</tr>
-		<tr>
-			<td style='text-align: right'>Date:</td>
-			<td><input type='date' name='DATE' value='<?php echo $date; ?>' /></td>
-		</tr>
-	</table>
-	<input type='submit' />
-</form>
-<br />
+		<div class='content'>
+			<h1>Schedule Visit</h1>
+			<form>
+				<input type='hidden' name='SUBMIT' value='1' />
+				<table>
+<?php
+if (is_admin()) {
+?>
+					<tr>
+						<td style='text-align: right'>SSN:</td>
+						<td><input type='text' name='SSN' value='<?php echo $ssn; ?>' /></td>
+					</tr>
+<?php
+}
+?>
+					<tr>
+						<td style='text-align: right'>Date:</td>
+						<td><input type='date' name='DATE' value='<?php echo $date; ?>' /></td>
+					</tr>
+				</table>
+				<input type='submit' />
+			</form>
+			<br />
 
 <?php
 
@@ -89,6 +96,6 @@ if (is_admin()) {
 	echo "<a href='user_main.php'>Home</a>";
 }
 ?>
-
-</body>
+		</div>
+	</body>
 </html>

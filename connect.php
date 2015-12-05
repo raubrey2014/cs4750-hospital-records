@@ -29,8 +29,9 @@ else {
 			echo "<p>$key => $value</p>";
 		endforeach;
 		$ssn = $row['SSN'];
-		echo "<a href='update_patient.php?SSN=$ssn'>Update Information</a>";
-		echo "<br /><br />";
+		echo "<a href='update_patient.php?SSN=$ssn'>Update Information</a><br />";
+		echo "<a href='view_patient_history.php?SUBMIT&PatientInfo=$ssn'>View Patient History</a><br />";
+		echo "<br />";
 		echo "******************************";
 	endwhile;
 }
