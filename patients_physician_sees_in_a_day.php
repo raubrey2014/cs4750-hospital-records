@@ -37,7 +37,7 @@
 
 <?php
 
-
+echo "<h1>In php main</h1>";
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
 
 if ($conn->connect_error) {
@@ -49,7 +49,8 @@ else if ($_REQUEST['SUBMIT']) {
         $day = $_REQUEST['DATE'];
         $physician = $_REQUEST['PhysicianName'];
         $sql = "SELECT * from Physician WHERE `Physician ID` = '$physician'";
-        $name = $conn->query($sql)->fetch_assoc()['Name'];
+        $row = $conn->query($sql)->fetch_assoc();
+	$name = $row['Name'];
         echo $day ." ".$name;
         echo "<h1>Results for $name on $day</h1>";
 
@@ -62,13 +63,19 @@ else if ($_REQUEST['SUBMIT']) {
         while ($row = $result4->fetch_assoc()) {
             $patient = $row['SSN'];
             $patient_name = "SELECT Name FROM Patient WHERE SSN = $patient";
-            $name2 = $conn->query($patient_name)->fetch_assoc()['Name'];
-            echo "<tr><td>$name2</td></tr>";
+            $row2 = $conn->query($patient_name)->fetch_assoc();
+            $name2 = $row2['Name'];
+	    echo "<tr><td>$name2</td></tr>";
         }  
         echo "</table>";
         $init = "SELECT count(`Visit ID`) as initCount FROM `Physician Visit` NATURAL JOIN Visit WHERE `Physician ID` = '$physician' AND Date = STR_TO_DATE('$day', '%Y-%m-%d')" ;
-        $count = $conn->query($init)->fetch_assoc()['initCount'];
+        $row3 = $conn->query($init)->fetch_assoc();
+	$count = $row3['initCount'];
         echo "<h3>$name saw a total of $count patients on $day</h3>";
+}
+else{
+	echo "<h1>In else</h1>";
+
 }
 
 

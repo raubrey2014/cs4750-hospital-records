@@ -45,8 +45,8 @@ else if ($_REQUEST['SUBMIT']) {
         // WHERE SSN =`$x`
         $init = "SELECT count(*) as initCount FROM `Patient Visit` NATURAL JOIN Patient NATURAL JOIN Visit WHERE SSN = $x AND Date = STR_TO_DATE('$y', '%Y-%m-%d')";
         $result = $conn->query($init);
-        $number_of_visits = $result->fetch_assoc()['initCount'];
-
+        $row0 = $result->fetch_assoc();
+	$number_of_visits = $row0['initCount'];
         $sql = "SELECT `Visit ID` FROM `Patient Visit` NATURAL JOIN Patient NATURAL JOIN Visit WHERE SSN = $x AND Date = STR_TO_DATE('$y', '%Y-%m-%d')";
         $result = $conn->query($sql);
         echo "<h1>There were $number_of_visits visits on $y</h1>";
