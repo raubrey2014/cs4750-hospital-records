@@ -1,16 +1,12 @@
 <?php 
 include 'login.php';
 validate_creds();
+if (is_admin()) {
+	include 'header.html';
+} else {
+	include 'header_patient.html';
+}
 ?>
-<!DOCTYPEhtml>
-<html>
-	<head>
-		<title>Schedule Visit</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
-		<link rel="stylesheet" type="text/css" href="hospital.css" />
-	</head>
-	<body>
 		<script>
 			webshim.polyfill('forms forms-ext');
 		</script>
@@ -48,7 +44,6 @@ if (is_admin()) {
 				</table>
 				<input type='submit' />
 			</form>
-			<br />
 
 <?php
 
@@ -87,15 +82,10 @@ else if ($_REQUEST['SUBMIT']) {
 }
 
 $conn->close();
-?>
 
-<?php
 if (is_admin()) {
-	echo "<a href='admin_main.php'>Home</a>";
+	include 'footer.html';
 } else {
-	echo "<a href='user_main.php'>Home</a>";
+	include 'footer_patient.html';
 }
 ?>
-		</div>
-	</body>
-</html>
