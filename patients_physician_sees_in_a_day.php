@@ -41,7 +41,6 @@ validate_creds();
 
 <?php
 
-echo "<h1>In php main</h1>";
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
 
 if ($conn->connect_error) {
@@ -54,7 +53,7 @@ else if (isset($_REQUEST['SUBMIT'])) {
         $physician = $_REQUEST['PhysicianName'];
         $sql = "SELECT * from Physician WHERE `Physician ID` = '$physician'";
         $row = $conn->query($sql)->fetch_assoc();
-	$name = $row['Name'];
+    	$name = $row['Name'];
         echo $day ." ".$name;
         echo "<h1>Results for $name on $day</h1>";
 
@@ -73,18 +72,9 @@ else if (isset($_REQUEST['SUBMIT'])) {
         }  
         echo "</table>";
         $init = "SELECT count(`Visit ID`) as initCount FROM `Physician Visit` NATURAL JOIN Visit WHERE `Physician ID` = '$physician' AND Date = STR_TO_DATE('$day', '%Y-%m-%d')" ;
-<<<<<<< HEAD
         $row3 = $conn->query($init)->fetch_assoc();
-	$count = $row3['initCount'];
+    	$count = $row3['initCount'];
         echo "<h3>$name saw a total of $count patients on $day</h3>";
-=======
-        $count = $conn->query($init)->fetch_assoc()['initCount'];
-        echo "<h3>$name saw a total of $count patients on $day.</h3>";
->>>>>>> dd90bbcbc30a39fca1b59872d603a75db24dd61a
-}
-else{
-	echo "<h1>In else</h1>";
-
 }
 
 
