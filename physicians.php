@@ -26,13 +26,15 @@ else {
         $result = $conn->query($sql);
 
 	echo "<table class='result-list'>";
-	echo "<tr><th>Physician ID</th><th>Salary</th><th>Name</th><th>Specialization</th></tr>"; 
+	echo "<tr><th>Physician ID</th><th>Salary</th><th>Name</th><th>Specialization</th><th>Actions</th></tr>"; 
 	while ($row = $result->fetch_assoc()):
+		$id = $row['Physician ID'];
 		echo "<tr>";
-		echo "<td>" . $row['Physician ID'] . "</td>";
+		echo "<td>" . $id . "</td>";
 		echo "<td>" . $row['Salary'] . "</td>";
 		echo "<td>" . $row['Name'] . "</td>";
 		echo "<td>" . $row['Specialization'] . "</td>";
+		echo "<td><a href='remove_physician.php?ID=$id'>Fire</a></td>";
 		echo "</tr>";
 	endwhile;
 }

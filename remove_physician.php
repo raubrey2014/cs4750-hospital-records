@@ -26,7 +26,11 @@ else if ($_REQUEST['SUBMIT']) {
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('d', $id);
 	if ($stmt->execute()) {
-		echo "<h2>Successfully removed physician</h2>";
+		if ($stmt->affected_rows === 1) {
+			echo "<h2>Successfully removed physician</h2>";
+		} else {
+			echo "<h2>Physician with given ID does not exist</h2>";
+		}
 	} else {
 		echo "<h2>Could not remove physician</h2>";
 	}
@@ -43,7 +47,7 @@ $conn->close();
 			<td><input type='text' name='ID' value='<?php echo $id; ?>' /></td>
 		</tr>
 	</table>
-	<input type='submit' />
+	<input type='submit' value='Remove' />
 </form>
 <br />
 <a href='site_admin.html'>
