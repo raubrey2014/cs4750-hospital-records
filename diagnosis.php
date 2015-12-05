@@ -25,10 +25,11 @@ else {
         $result = $conn->query($sql);
 
 	echo "<table class='result-list'>";
-	echo "<tr><th>Illness</th></tr>"; 
+	echo "<tr><th>Illness</th><th>Summary</th></tr>"; 
 	while ($row = $result->fetch_assoc()):
 		echo "<tr>";
 		echo "<td>" . $row['Illness'] . "</td>";
+		echo "<td>" . $row['Summary'] . "</td>";
 		echo "</tr>";
 	endwhile;
 }
