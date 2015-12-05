@@ -35,7 +35,10 @@ validate_creds();
 <br />
 <a href="receptionist.html">Receptionist Login</a>
 <br />
-<a href="site_admin.html">Site Admin Login</a>
+<h3>Physician and Patient</h3>
+<a href="site_admin.html">Add and Remove Physicians and Patients</a>
+<br />
+<br />
 <form method="post" action="login.php">
 			<input type = "submit" value = "Logout" name="logout">
 			</form>
