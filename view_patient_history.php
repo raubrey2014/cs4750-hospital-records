@@ -14,6 +14,7 @@ validate_creds();
                 webshim.polyfill('forms forms-ext');
         </script>
 	<h1>View a Patient's History</h1>
+
 	<div class='content'>
 	<form>
         <input type='hidden' name='SUBMIT' value='1' />
@@ -38,7 +39,6 @@ validate_creds();
         ?>
 	<input type='submit' />
 </form>
-</div>
 <?php 
 if (isset($_REQUEST['SUBMIT'])){
 	if (isset($_REQUEST['PatientInfo'])){
@@ -56,21 +56,29 @@ if (isset($_REQUEST['SUBMIT'])){
             while ($row = $result->fetch_assoc()) {
             	$patient_name = $row['Name'];
             }
-        	$sql = "SELECT Date, `Visit ID`, Illness FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit NATURAL JOIN `Visit Diagnosis` WHERE SSN = '$ssn'";
+            echo "<h4>Results for patient $patient_name</h4>";
+            echo "<table class='result-list'>";
+			echo "<tr><th>Visit ID</th><th>Date</th><th>Diagnosis</th><th>Treatment</th></tr>";
+        	$sql = "SELECT `Visit ID`, Date, Illness, `Treatment Description` FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit NATURAL LEFT JOIN `Visit Diagnosis` NATURAL LEFT JOIN `Visit Treatment` WHERE SSN = '$ssn'";
        		$result = $conn->query($sql);
         	while ($row = $result->fetch_assoc()) {
-            	$date = $row['Date'];
-            	$visit_id = $row['Visit ID'];
-            	$illness = $row['Illness'];
-            	
-            	echo $date.' '.$visit_id.' '.$illness.' <br />';
+        		echo "<tr>";
+        		foreach($row as $key=>$value){
+        			echo "<td>$value</td>";
+        		}
+        		echo "</tr>";
             }
+            echo "</table>";
         }
 
 
 	}
 }
 ?>
+<br>
+<a href='admin_main.php'>Back
+	</a>
+</div>
 
 </body>
 </html>
