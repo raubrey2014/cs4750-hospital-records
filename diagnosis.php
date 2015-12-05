@@ -1,9 +1,16 @@
+<?php 
+include 'login.php';
+validate_creds();
+?>
 <!DOCTYPEhtml>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="hospital.css" />
+	
 </head>
 <body>
-<h1>CS4750</h1>
+	<div class='content'>
+<h1>View Diagnoses</h1>
 <?php
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
@@ -14,19 +21,18 @@ if ($conn->connect_error) {
 
 }
 else {
-	//diagnosis, diagnosis treatment, Patient, Patient Visit, 
-	//Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
-	$sql = "SELECT * FROM Diagnosis";
+	$sql = "SELECT * FROM Diagnosis WHERE 1";
         $result = $conn->query($sql);
-	echo "******************************";
 
+	echo "<table class='result-list'>";
+	echo "<tr><th>Illness</th></tr>"; 
 	while ($row = $result->fetch_assoc()):
-		foreach($row as $key=>$value):
-			echo "<p>$key => $value</p>";
-		endforeach;
-		echo "******************************";
+		echo "<tr>";
+		echo "<td>" . $row['Illness'] . "</td>";
+		echo "</tr>";
 	endwhile;
 }
 ?>
+</div>
 </body>
 </html>

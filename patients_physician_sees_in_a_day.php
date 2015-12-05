@@ -1,3 +1,7 @@
+<?php 
+include 'login.php';
+validate_creds();
+?>
 <!DOCTYPEhtml>
 <html>
         <head>
@@ -45,7 +49,7 @@ if ($conn->connect_error) {
          die("Connection failed: " . $conn->connect_error);
 
 }
-else if ($_REQUEST['SUBMIT']) {
+else if (isset($_REQUEST['SUBMIT'])) {
         $day = $_REQUEST['DATE'];
         $physician = $_REQUEST['PhysicianName'];
         $sql = "SELECT * from Physician WHERE `Physician ID` = '$physician'";
@@ -69,9 +73,14 @@ else if ($_REQUEST['SUBMIT']) {
         }  
         echo "</table>";
         $init = "SELECT count(`Visit ID`) as initCount FROM `Physician Visit` NATURAL JOIN Visit WHERE `Physician ID` = '$physician' AND Date = STR_TO_DATE('$day', '%Y-%m-%d')" ;
+<<<<<<< HEAD
         $row3 = $conn->query($init)->fetch_assoc();
 	$count = $row3['initCount'];
         echo "<h3>$name saw a total of $count patients on $day</h3>";
+=======
+        $count = $conn->query($init)->fetch_assoc()['initCount'];
+        echo "<h3>$name saw a total of $count patients on $day.</h3>";
+>>>>>>> dd90bbcbc30a39fca1b59872d603a75db24dd61a
 }
 else{
 	echo "<h1>In else</h1>";
@@ -82,7 +91,7 @@ else{
 ?>
 <br />
 
-<a href='index.html'>
+<a href='admin_main.php'>
         Back
 </a>
 </body>

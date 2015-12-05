@@ -1,21 +1,16 @@
+<?php 
+include 'login.php';
+validate_creds();
+?>
 <!DOCTYPEhtml>
 <html>
-<head>
+<head>	
+		<link rel="stylesheet" type="text/css" href="hospital.css" />
+
 </head>
 <body>
 <h1>View Visits</h1>
-<hr>
-<p>What would you like to do?</p>
-
-<select name='Actions' form='queryForm'>
-	<option>View My Visits</option>
-	<option name='specialization'>See the specialist on my visits</option>
-</select>
-<form action='visit.php' method='POST' id='queryForm'>
-<input type='submit' value='Submit' name='Submit'/>
-</form>
-
-<br />
+	<div class='content'>
 
 <?php
 //specialization('Diagnostician', 1);
@@ -49,29 +44,37 @@ if ($conn->connect_error) {
 
 }
 else {
-	//diagnosis, diagnosis treatment, Patient, Patient Visit, 
-	//Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
-	$sql = "SELECT * FROM Visit";
-        $result = $conn->query($sql);
-	echo "******************************";
-
+	$sql = "SELECT `Visit ID`, Date, Name, Illness, `Treatment Description` FROM Visit NATURAL JOIN `Patient Visit` NATURAL JOIN `Patient` NATURAL JOIN `Visit Diagnosis` NATURAL JOiN `Visit Treatment` WHERE 1";
+    $result = $conn->query($sql);
+    echo "<h4>Visits resulting in a Diagnosis</h4>";
+	echo "<table class='result-list'>";
+	echo "<tr><th>Visit ID</th><th>Date</th><th>Patient Name</th><th>Diagnosis</th><th>Treatment</th></tr>"; 
 	while ($row = $result->fetch_assoc()):
-		foreach($row as $key=>$value):
-			echo "<p>$key => $value</p>";
-		endforeach;
-		echo "<p>Doctors associated with this visit?</p>";
-		$x = $row['Visit ID'];
-		$sql2 = "SELECT Name, Specialization FROM Physician NATURAL JOIN `Physician Visit` WHERE `Visit ID` = '$x'";
-	        $result2 = $conn->query($sql2);
-		while ($row2 = $result2->fetch_assoc()):
-			foreach($row2 as $key2=>$value2):
-        	                echo "<p>$key2 => $value2</p>";
-                	endforeach;
-		endwhile;
-		echo "******************************";
+		echo "<tr>";
+		foreach($row as $key=>$value){
+			echo "<td>$value</td>";
+		}
+		echo "</tr>";
 	endwhile;
+	echo "</table>";
+	$sql = "SELECT `Visit ID`, Date, Name FROM Visit NATURAL JOIN `Patient Visit` NATURAL JOIN `Patient` WHERE 1";
+	$result = $conn->query($sql);
+    echo "<h4>Visits not resulting in a Diagnosis</h4>";
+	echo "<table class='result-list'>";
+	echo "<tr><th>Visit ID</th><th>Date</th><th>Patient Name</th></tr>"; 
+	while ($row = $result->fetch_assoc()):
+		echo "<tr>";
+		foreach($row as $key=>$value){
+			echo "<td>$value</td>";
+		}
+		echo "</tr>";
+	endwhile;
+	echo "</table>";
+
+	
 }
 $conn->close();
 ?>
+</div>
 </body>
 </html>

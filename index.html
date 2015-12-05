@@ -1,38 +1,41 @@
 <!DOCTYPEhtml>
 <html>
 <head>
-	<title>CS4750 Project</title>
-    <link rel="stylesheet" type="text/css" href="hospital.css" />
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
+
 <body>
-<h1>Medical Records</h1>
-<a href="connect.php">View Patients</a>
-<br />
-<a href="physicians.php">View Physicians</a>
-<br />
-<a href="treatment.php">View Treatments</a>
-<br />
-<a href="diagnosis.php">View Diagnosis</a>
-<br />
-<a href="visit.php">View Visits</a>
-<br />
-<a href="specialists_on_visits.php">View Specialists for a visit</a>
-<br />
-<a href="patients_physician_sees_in_a_day.php">Patients a physician sees in a day</a>
-<br />
-<a href="patients_on_day.php">Patient visits for day</a>
-<br />
-<a href="treatment_for_diagnosis.php">Treatment frequency for diagnosis</a>
-<br />
-<a href="timediff_patient_diagnosis.php">Average time between visits with diagnosis</a>
-<br />
-<a href="update_patient.php">Update Patient Info</a>
-<br />
-<a href="receptionist.html">Receptionist Login</a>
-<br />
-<a href="site_admin.html">Site Admin Login</a>
+<div class="container">
+    <h1>Hospital Visit Database</h1>
+    <hr>
+      <form class="form-signin" method="POST" action="login.php">
+        <h2 class="form-signin-heading">User Sign In</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input id="inputUsername" class="form-control" placeholder="Username" required autofocus name='username'>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name='password'>
+        
+        <input class="btn btn-lg btn-primary btn-block" type="submit">	</input>
+      </form>
+      <hr>
+    <form class="form-signin" method="POST" action="login.php">
+        <h2 class="form-signin-heading">Admin Sign In</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input id="inputUsername" class="form-control" placeholder="Username" required autofocus name='admin_username'>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name='admin_password'>
+        
+        <input class="btn btn-lg btn-primary btn-block" type="submit">  </input>
+      </form>
+    </div>
 
-
+   
 </body>
 </html>

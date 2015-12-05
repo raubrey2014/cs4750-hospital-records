@@ -1,3 +1,7 @@
+<?php 
+include 'login.php';
+validate_creds();
+?>
 <!DOCTYPEhtml>
 <html>
 	<head>
@@ -13,7 +17,12 @@
 		<h1>Update Patient</h1>
 <?php
 
-$ssn = $_REQUEST['SSN'];
+if (is_admin()) {
+	$ssn = $_REQUEST['SSN'];
+} else {
+	$ssn = $_SESSION['current_ssn'];
+}
+
 $name = $_REQUEST['NAME'];
 $dob = $_REQUEST['DOB'];
 $email = $_REQUEST['EMAIL'];
@@ -55,7 +64,7 @@ $conn->close();
 	<table>
 		<tr>
 			<td style='text-align: right'>SSN:</td>
-			<td><input type='text' name='SSN' value='<?php echo "$ssn" ?>' /></td>
+			<td><input type='text' name='SSN' value='<?php echo "$ssn" ?>' readonly /></td>
 		</tr>
 		<tr>
 			<td style='text-align: right'>Name:</td>
@@ -81,9 +90,13 @@ $conn->close();
 	<input type='submit' />
 </form>
 <br />
-<a href='index.html'>
-	Back
-</a>
+<?php
+if (is_admin()) {
+	echo "<a href='admin_main.php'>Home</a>";
+} else {
+	echo "<a href='user_main.php'>Home</a>";
+}
+?>
 
 </body>
 </html>
