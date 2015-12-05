@@ -1,14 +1,8 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-<head>	
-		<link rel="stylesheet" type="text/css" href="hospital.css" />
-
-</head>
-<body>
 <h1>View Visits</h1>
 	<div class='content'>
 
@@ -75,6 +69,4 @@ else {
 }
 $conn->close();
 ?>
-</div>
-</body>
-</html>
+<?php include 'footer.html'; ?>
