@@ -91,4 +91,16 @@ function validate_creds(){
 function is_admin() {
 	return isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 }
+function is_patient() {
+	return !is_admin();
+}
+
+function validate_creds_patient(){
+	validate_creds();
+
+	if (!is_patient()){
+		header("Location: index.html");
+		exit();
+	}
+}
 ?>
