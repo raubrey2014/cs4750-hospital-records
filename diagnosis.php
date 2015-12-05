@@ -5,6 +5,8 @@ validate_creds();
 <!DOCTYPEhtml>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="hospital.css" />
+	
 </head>
 <body>
 <h1>CS4750</h1>
