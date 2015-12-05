@@ -23,11 +23,12 @@ function check_admin_login(){
         $result = $conn->query($sql);
         if ($result->num_rows > 0){
         	while($row = $result->fetch_assoc()):
-				$_SESSION['admin'] = true;
+				  $_SESSION['admin'] = true;
 	  			$_SESSION['current_user'] = $username;
 	  				######################################NEED TO CHANGE FOR WHAT YOU USE############
 	  			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
-	        	header("Location: admin_main.php");
+	        	// header("Location: admin_main.php");
+          header("Location: admin_index.html");
 	   			exit();
 	   		endwhile;
         } else {
