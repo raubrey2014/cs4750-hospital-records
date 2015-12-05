@@ -1,21 +1,11 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-<head>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-                <script src="https://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
-                <link rel="stylesheet" type="text/css" href="hospital.css" />
-        </head>
-<body>
-        <script>
-                webshim.polyfill('forms forms-ext');
-        </script>
+	<link rel="stylesheet" type="text/css" href="hospital.css" />
 	<h1>View a Patient's History</h1>
 
-	<div class='content'>
 	<form>
         <input type='hidden' name='SUBMIT' value='1' />
         Patient SSN:
@@ -48,7 +38,7 @@ if (isset($_REQUEST['SUBMIT'])){
         $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
         if ($conn->connect_error) {
 
-         die("Connection failed: " . $conn->connect_error);
+            die("Connection failed: " . $conn->connect_error);
 
         }
         else{
@@ -74,11 +64,6 @@ if (isset($_REQUEST['SUBMIT'])){
 
 	}
 }
-?>
-<br>
-<a href='admin_main.php'>Back
-	</a>
-</div>
 
-</body>
-</html>
+include 'footer.html';
+?>
