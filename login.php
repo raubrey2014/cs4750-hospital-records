@@ -23,16 +23,17 @@ function check_admin_login(){
         $result = $conn->query($sql);
         if ($result->num_rows > 0){
         	while($row = $result->fetch_assoc()):
+				$_SESSION['admin'] = true;
 	  			$_SESSION['current_user'] = $username;
 	  				######################################NEED TO CHANGE FOR WHAT YOU USE############
 	  			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
-	        	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/admin_main.php");
+	        	header("Location: admin_main.php");
 	   			exit();
 	   		endwhile;
         } else {
         		######################################NEED TO CHANGE FOR WHAT YOU USE############
   			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
-        	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/");
+        	header("Location: index.html");
    			exit();
 
         }
@@ -54,15 +55,16 @@ function check_user_login(){
         if ($result->num_rows > 0){
         	while($row = $result->fetch_assoc()):
 	  			$_SESSION['current_user'] = $username;
+				$_SESSION['current_ssn'] = $row['SSN'];
 	  				######################################NEED TO CHANGE FOR WHAT YOU USE############
 	  			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
-	        	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/user_main.php");
+	        	header("Location: user_main.php");
 	   			exit();
 	   		endwhile;
         } else {
         		######################################NEED TO CHANGE FOR WHAT YOU USE############
   			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
-        	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/");
+        	header("Location: index.html");
    			exit();
 
         }
@@ -74,14 +76,18 @@ function check_user_login(){
 
 function logout(){
 	session_unset();
-	header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/");
+	header("Location: index.html");
     exit();
 }
 function validate_creds(){
 	if (!isset($_SESSION['current_user'])){
 		#####################AGAIN MUST CHANGE#########################
-		header("Location: http://localhost:8080/cs4750/cs4750-hospital-records/");
+		header("Location: index.html");
 		exit();
 	}
+}
+
+function is_admin() {
+	return isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 }
 ?>

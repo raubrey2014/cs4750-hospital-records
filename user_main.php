@@ -13,6 +13,10 @@ validate_creds();
 <body>
 <h1>User Portal</h1>
 
+<a href='update_patient.php'>View/Update Info</a><br />
+<a href='#'>View Visit History</a><br />
+<a href='add_visit.php'>Schedule Visit</a><br />
+<br />
 <form method="post" action="login.php">
 			<input type = "submit" value = "Logout" name="logout">
 			</form>
