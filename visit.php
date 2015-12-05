@@ -44,7 +44,7 @@ if ($conn->connect_error) {
 
 }
 else {
-	$sql = "SELECT `Visit ID`, Date, Name, Illness, `Treatment Description` FROM Visit NATURAL JOIN `Patient Visit` NATURAL JOIN `Patient` NATURAL JOIN `Visit Diagnosis` NATURAL JOiN `Visit Treatment` WHERE 1";
+	$sql = "SELECT `Visit ID`, Date, Name, Illness, `Treatment Name` FROM Visit NATURAL JOIN `Patient Visit` NATURAL JOIN `Patient` NATURAL JOIN `Visit Diagnosis` NATURAL JOiN `Visit Treatment` WHERE 1";
     $result = $conn->query($sql);
     echo "<h4>Visits resulting in a Diagnosis</h4>";
 	echo "<table class='result-list'>";

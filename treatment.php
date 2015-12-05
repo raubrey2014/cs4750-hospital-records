@@ -25,9 +25,10 @@ else {
         $result = $conn->query($sql);
 
 	echo "<table class='result-list'>";
-	echo "<tr><th>Treatment Description</th><th>Duration</th><th>Frequency</th></tr>"; 
+	echo "<tr><th>Treatment Name</th><th>Treatment Description</th><th>Duration</th><th>Frequency</th></tr>"; 
 	while ($row = $result->fetch_assoc()):
 		echo "<tr>";
+		echo "<td>" . $row['Treatment Name'] . "</td>";
 		echo "<td>" . $row['Treatment Description'] . "</td>";
 		echo "<td>" . $row['Duration'] . "</td>";
 		echo "<td>" . $row['Frequency'] . "</td>";

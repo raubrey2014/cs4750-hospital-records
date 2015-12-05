@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 else{
 	echo "<table class='result-list'>";
 	echo "<tr><th>Visit ID</th><th>Date</th><th>Diagnosis</th><th>Treatment</th></tr>";
-	$sql = "SELECT `Visit ID`, Date, Illness, `Treatment Description` FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit NATURAL LEFT JOIN `Visit Diagnosis` NATURAL LEFT JOIN `Visit Treatment` WHERE SSN = '$ssn'";
+	$sql = "SELECT `Visit ID`, Date, Illness, `Treatment Name` FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit NATURAL LEFT JOIN `Visit Diagnosis` NATURAL LEFT JOIN `Visit Treatment` WHERE SSN = '$ssn'";
 	$result = $conn->query($sql);
 	while ($row = $result->fetch_assoc()) {
 		echo "<tr>";
