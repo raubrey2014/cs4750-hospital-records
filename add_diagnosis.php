@@ -1,16 +1,8 @@
-<!DOCTYPEhtml>
-<html>
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</head>
-<body>
-
+<?php 
+include 'login.php';
+validate_creds();
+include 'header.html';
+?>
 <h1>Add Diagnosis</h1>
 <div id="container">
 <form role="form" class='form-inline'>
@@ -18,7 +10,7 @@
     <label for="Name">New Diagnosis Name:</label>
     <input type="Name" class="form-control" id="Name" name="Name">
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
 
@@ -55,5 +47,5 @@ function create_diagnosis(){
 <a href='admin_main.php'>
 	Back
 </a>
-</body>
-</html
+
+<?php include 'footer.html'; ?>

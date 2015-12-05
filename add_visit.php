@@ -18,7 +18,6 @@ if (is_admin()) {
 	$ssn = $_SESSION['current_ssn'];
 }
 
-$date = $_REQUEST['DATE'];
 
 ?>
 
@@ -29,13 +28,25 @@ $date = $_REQUEST['DATE'];
 				<table>
 <?php
 if (is_admin()) {
+	if (isset($_REQUEST['SUBMIT'])){
 ?>
 					<tr>
 						<td style='text-align: right'>SSN:</td>
 						<td><input type='text' name='SSN' value='<?php echo $ssn; ?>' /></td>
 					</tr>
 <?php
+	}
+	else {
+		?>
+		
+					<tr>
+						<td style='text-align: right'>SSN:</td>
+						<td><input type='text' name='SSN' value='' /></td>
+					</tr>
+	<?php
+	}
 }
+if (isset($_REQUEST['SUBMIT'])){
 ?>
 					<tr>
 						<td style='text-align: right'>Date:</td>
@@ -44,7 +55,17 @@ if (is_admin()) {
 				</table>
 				<input type='submit' />
 			</form>
-
+<?php } else {
+				?>
+				<tr>
+						<td style='text-align: right'>Date:</td>
+						<td><input type='date' name='DATE' value='' /></td>
+					</tr>
+				</table>
+				<input type='submit' />
+			</form>
+<?php } ?>
+ 
 <?php
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
@@ -54,7 +75,9 @@ if ($conn->connect_error) {
          die("Connection failed: " . $conn->connect_error);
 
 }
-else if ($_REQUEST['SUBMIT']) {
+else if (isset($_REQUEST['SUBMIT'])) {
+	$date = $_REQUEST['DATE'];
+
 	$sql = "INSERT INTO Visit (Date) VALUES (STR_TO_DATE(?, '%Y-%m-%d'));";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('s', $date);

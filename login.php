@@ -28,7 +28,7 @@ function check_admin_login(){
 	  				######################################NEED TO CHANGE FOR WHAT YOU USE############
 	  			 	#header("Location http://plato.cs.virginia.edu/~rma7qb/cs4750-hospital-records/main.html");
 	        	// header("Location: admin_main.php");
-          header("Location: admin_index.html");
+          header("Location: admin_main.php");
 	   			exit();
 	   		endwhile;
         } else {

@@ -7,7 +7,7 @@ validate_creds();
 <head>
 </head>
 <body>
-<h1>CS4750</h1>
+<h1>Remove Physician</h1>
 <?php
 
 $id = $_REQUEST['ID'];

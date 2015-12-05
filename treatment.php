@@ -1,16 +1,11 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-<head>
-		<link rel="stylesheet" type="text/css" href="hospital.css" />
-
-</head>
-<body>
-	<div class='content'>
+<div class='content'>
 <h1>View Treatments</h1>
+
 <?php
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
@@ -36,6 +31,9 @@ else {
 	endwhile;
 }
 ?>
+</table>
 </div>
-</body>
-</html>
+
+<?php
+include 'footer.html';
+?>

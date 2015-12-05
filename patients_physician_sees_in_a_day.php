@@ -1,18 +1,9 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-        <head>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-                <script src="https://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
-                <link rel="stylesheet" type="text/css" href="hospital.css" />
-        </head>
-        <body>
-                <script>
-                        webshim.polyfill('forms forms-ext');
-                </script>
+
 <h1>Patients seen by a Physician on a Day</h1>
 
 <form>
@@ -84,5 +75,4 @@ else if (isset($_REQUEST['SUBMIT'])) {
 <a href='admin_main.php'>
         Back
 </a>
-</body>
-</html>
+<?php include 'footer.html'; ?>

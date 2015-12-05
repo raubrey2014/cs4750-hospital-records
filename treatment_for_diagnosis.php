@@ -1,14 +1,11 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-<head>
-</head>
-<body>
 <h1>Frequency of treatment for diagnosis</h1>
 
+<?php if (isset($_REQUEST['SUBMIT'])) { ?>
 <form>
 	<input type='hidden' name='SUBMIT' value='1' />
 	<table>
@@ -23,11 +20,25 @@ validate_creds();
 	</table>
 	<input type='submit' />
 </form>
-
+<?php } else { ?>
+<form>
+	<input type='hidden' name='SUBMIT' value='1' />
+	<table>
+		<tr>
+			<td>Diagnosis: </td>
+			<td><input type='text' name='DIAG' value='' /></td>
+		</tr>
+		<tr>
+			<td>Treatment: </td>
+			<td><input type='text' name='TREAT' value='' /></td>
+		</tr>
+	</table>
+	<input type='submit' />
+</form>
+<?php } ?>
 <?php
 
-$diag = $_REQUEST['DIAG'];
-$treat = $_REQUEST['TREAT'];
+
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
 
@@ -36,8 +47,10 @@ if ($conn->connect_error) {
          die("Connection failed: " . $conn->connect_error);
 
 }
-else if ($_REQUEST['SUBMIT']) {
+else if (isset($_REQUEST['SUBMIT'])) {
 	// 
+	$diag = $_REQUEST['DIAG'];
+	$treat = $_REQUEST['TREAT'];
 	$sql_diagnosis = "SELECT `Visit ID` FROM Visit NATURAL JOIN `Visit Diagnosis` NATURAL JOIN Diagnosis WHERE Illness = ?";
 	$sql_treatment = "SELECT `Visit ID`, 1 AS num FROM Visit NATURAL JOIN `Visit Treatment` NATURAL JOIN Treatment WHERE `Treatment Name` = ?";
 	$sql = "SELECT COUNT(*), SUM(num) FROM ($sql_diagnosis) AS diag LEFT OUTER JOIN ($sql_treatment) AS treat USING (`Visit ID`);";
@@ -60,8 +73,5 @@ else if ($_REQUEST['SUBMIT']) {
 }
 ?>
 <br />
-<a href='index.html'>
-	Back
-</a>
-</body>
-</html>
+
+<?php include 'footer.html'; ?>

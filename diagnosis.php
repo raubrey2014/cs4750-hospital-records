@@ -1,15 +1,9 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="hospital.css" />
-	
-</head>
-<body>
-	<div class='content'>
+<div class='content'>
 <h1>View Diagnoses</h1>
 <?php
 
@@ -32,8 +26,8 @@ else {
 		echo "<td>" . $row['Summary'] . "</td>";
 		echo "</tr>";
 	endwhile;
+	echo "</table>";
 }
 ?>
 </div>
-</body>
-</html>
+<?php include 'footer.html'; ?>
