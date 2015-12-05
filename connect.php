@@ -35,8 +35,8 @@ else {
 		echo "<td>$email</td>";
 		echo "<td>$phone</td>";
 		echo "<td>$address</td>";
-		echo "<td><a href='update_patient.php?SSN=$ssn'><button type='submit' class='btn btn-primary'>Edit</button</a></td>";
-		echo "<td><a href='view_patient_history.php?SUBMIT&PatientInfo=$ssn'><button type='submit' class='btn btn-primary'>History</button</a></td>";
+		echo "<td><a href='update_patient.php?SSN=$ssn'><button type='submit' class='btn btn-primary'>Edit</button></a></td>";
+		echo "<td><a href='view_patient_history.php?SUBMIT&PatientInfo=$ssn'><button type='submit' class='btn btn-primary'>History</button></a></td>";
 
 		
 		echo "</tr>";

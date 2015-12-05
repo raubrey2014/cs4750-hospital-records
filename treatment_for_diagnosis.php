@@ -73,7 +73,5 @@ else if (isset($_REQUEST['SUBMIT'])) {
 }
 ?>
 <br />
-<a href='index.html'>
-	Back
-</a>
+
 <?php include 'footer.html'; ?>

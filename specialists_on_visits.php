@@ -1,46 +1,35 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-        <head>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-                <script src="https://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
-                <link rel="stylesheet" type="text/css" href="hospital.css" />
-        </head>
-        <body>
-                <script>
-                        webshim.polyfill('forms forms-ext');
-                </script>
+
 <h1>Specialists on a Visit</h1>
-
 <form>
-        <input type='hidden' name='SUBMIT' value='1' />
-        Date of visit: <input type='date' name='DATE' value='<?php echo $_REQUEST['DATE'] ?>' />
-        <!-- Patient SSN: <input type='text' name='PATIENT_SSN' value='Example' /> -->
-        <?php
-        $sql = "SELECT * FROM Patient";
-        $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
-        if ($conn->connect_error) {
+    <input type='hidden' name='SUBMIT' value='1' />
+    Date of visit: <input type='date' name='DATE' value='<?php echo $_REQUEST['DATE'] ?>' />
+    <!-- Patient SSN: <input type='text' name='PATIENT_SSN' value='Example' /> -->
+    <?php
+    $sql = "SELECT * FROM Patient";
+    $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
+    if ($conn->connect_error) {
 
-         die("Connection failed: " . $conn->connect_error);
+     die("Connection failed: " . $conn->connect_error);
 
+    }
+    else{
+        $result = $conn->query($sql);
+        echo "Patient SSN: <select name='PATIENT_SSN'>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value='" . $row['SSN'] . "'>" . $row['SSN'] . "</option>";
         }
-        else{
-            $result = $conn->query($sql);
-            echo "<select name='PATIENT_SSN'>";
-            while ($row = $result->fetch_assoc()) {
-                echo "<option value='" . $row['SSN'] . "'>" . "SSN: ". $row['SSN'] . ", Name: ". $row['Name'] . "</option>";
-            }
-            echo "</select>";
-        }
-        ?>
+        echo "</select>";
+    }
+    ?>
 	<input type='submit' />
 </form>
 
 <?php
-
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
 
@@ -57,7 +46,7 @@ else if (isset($_REQUEST['SUBMIT'])) {
 	$number_of_visits = $row0['initCount'];
         $sql = "SELECT `Visit ID` FROM `Patient Visit` NATURAL JOIN Patient NATURAL JOIN Visit WHERE SSN = $x AND Date = STR_TO_DATE('$y', '%Y-%m-%d')";
         $result = $conn->query($sql);
-        echo "<h1>There were $number_of_visits visits on $y</h1>";
+        echo "<h1>There were $number_of_visits visit(s) on $y</h1>";
         while ($row = $result->fetch_assoc()) {
 
             $visit_num = $row['Visit ID'];
@@ -126,5 +115,4 @@ function specialization($number){
 <a href='admin_main.php'>
         Back
 </a>
-</body>
-</html>
+<?php include 'footer.html'; ?>

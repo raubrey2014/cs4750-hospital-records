@@ -1,18 +1,8 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
-		<link rel="stylesheet" type="text/css" href="hospital.css" />
-	</head>
-	<body>
-		<script>
-			webshim.polyfill('forms forms-ext');
-		</script>
 <div class='content'>
 <h1>Patients Visited on Date</h1>
 
@@ -24,7 +14,6 @@ validate_creds();
 
 <?php
 
-$day = $_REQUEST['DATE'];
 
 $conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
 
@@ -33,7 +22,9 @@ if ($conn->connect_error) {
          die("Connection failed: " . $conn->connect_error);
 
 }
-else if ($_REQUEST['SUBMIT']) {
+else if (isset($_REQUEST['SUBMIT'])) {
+	$day = $_REQUEST['DATE'];
+
 	//diagnosis, diagnosis treatment, Patient, Patient Visit, 
 	//Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
 	$sql = "SELECT SSN, Name, DATE_FORMAT(DOB, '%m/%d/%Y'), Email, `Phone Number`, Address FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit WHERE Date = STR_TO_DATE(?, '%Y-%m-%d')";
@@ -63,5 +54,4 @@ else if ($_REQUEST['SUBMIT']) {
 	Back
 </a>
 </div>
-</body>
-</html>
+<?php include 'footer.html'; ?>

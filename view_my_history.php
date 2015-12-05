@@ -15,18 +15,24 @@ if ($conn->connect_error) {
 
 }
 else{
-	echo "<table class='result-list'>";
-	echo "<tr><th>Visit ID</th><th>Date</th><th>Diagnosis</th><th>Treatment</th></tr>";
+	
 	$sql = "SELECT `Visit ID`, Date, Illness, `Treatment Description` FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit NATURAL LEFT JOIN `Visit Diagnosis` NATURAL LEFT JOIN `Visit Treatment` WHERE SSN = '$ssn'";
 	$result = $conn->query($sql);
-	while ($row = $result->fetch_assoc()) {
-		echo "<tr>";
-		foreach($row as $key=>$value){
-			echo "<td>$value</td>";
+	if ($result){
+		echo "<table class='result-list'>";
+		echo "<tr><th>Visit ID</th><th>Date</th><th>Diagnosis</th><th>Treatment</th></tr>";
+		while ($row = $result->fetch_assoc()) {
+			echo "<tr>";
+			foreach($row as $key=>$value){
+				echo "<td>$value</td>";
+			}
+			echo "</tr>";
 		}
-		echo "</tr>";
+		echo "</table>";
 	}
-	echo "</table>";
+	else {
+		echo "<h3>You have had no visits!</h3>";
+	}
 }
 
 include 'footer_patient.html';

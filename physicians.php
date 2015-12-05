@@ -1,13 +1,8 @@
 <?php 
 include 'login.php';
 validate_creds();
+include 'header.html';
 ?>
-<!DOCTYPEhtml>
-<html>
-<head>
-		<link rel="stylesheet" type="text/css" href="hospital.css" />
-</head>
-<body>
 <div class='content'>
 <h1>Physicians</h1>
 <?php
@@ -34,11 +29,11 @@ else {
 		echo "<td>" . $row['Salary'] . "</td>";
 		echo "<td>" . $row['Name'] . "</td>";
 		echo "<td>" . $row['Specialization'] . "</td>";
-		echo "<td><a href='remove_physician.php?ID=$id'>Fire</a></td>";
+		echo "<td><a href='remove_physician.php?ID=$id'><button type='submit' class='btn btn-primary'>Fire</button></a></td>";
 		echo "</tr>";
 	endwhile;
+	echo "</table>";
 }
 ?>
 </div>
-</body>
-</html>
+<?php include 'footer.html'; ?>
