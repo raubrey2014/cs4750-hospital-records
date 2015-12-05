@@ -52,7 +52,7 @@ else if (isset($_REQUEST['SUBMIT'])) {
 	$diag = $_REQUEST['DIAG'];
 	$treat = $_REQUEST['TREAT'];
 	$sql_diagnosis = "SELECT `Visit ID` FROM Visit NATURAL JOIN `Visit Diagnosis` NATURAL JOIN Diagnosis WHERE Illness = ?";
-	$sql_treatment = "SELECT `Visit ID`, 1 AS num FROM Visit NATURAL JOIN `Visit Treatment` NATURAL JOIN Treatment WHERE `Treatment Description` = ?";
+	$sql_treatment = "SELECT `Visit ID`, 1 AS num FROM Visit NATURAL JOIN `Visit Treatment` NATURAL JOIN Treatment WHERE `Treatment Name` = ?";
 	$sql = "SELECT COUNT(*), SUM(num) FROM ($sql_diagnosis) AS diag LEFT OUTER JOIN ($sql_treatment) AS treat USING (`Visit ID`);";
         $stmt = $conn->prepare($sql);
 	$stmt->bind_param('ss', $diag, $treat);

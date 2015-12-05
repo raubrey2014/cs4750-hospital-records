@@ -15,8 +15,7 @@ if ($conn->connect_error) {
 
 }
 else{
-	
-	$sql = "SELECT `Visit ID`, Date, Illness, `Treatment Description` FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit NATURAL LEFT JOIN `Visit Diagnosis` NATURAL LEFT JOIN `Visit Treatment` WHERE SSN = '$ssn'";
+	$sql = "SELECT `Visit ID`, Date, Illness, `Treatment Name` FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit NATURAL LEFT JOIN `Visit Diagnosis` NATURAL LEFT JOIN `Visit Treatment` WHERE SSN = '$ssn'";
 	$result = $conn->query($sql);
 	if ($result){
 		echo "<table class='result-list'>";
