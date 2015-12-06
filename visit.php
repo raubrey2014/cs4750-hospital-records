@@ -38,7 +38,7 @@ if ($conn->connect_error) {
 
 }
 else {
-	$sql = "SELECT `Visit ID`, Date, Name, Illness, `Treatment Name` FROM Visit NATURAL JOIN `Patient Visit` NATURAL JOIN `Patient` NATURAL JOIN `Visit Diagnosis` NATURAL JOiN `Visit Treatment` WHERE 1";
+	$sql = "SELECT `Visit ID`, Date, Name, Illness, `Treatment Name` FROM Visit NATURAL JOIN `Patient Visit` NATURAL JOIN `Patient` NATURAL JOIN `Visit Diagnosis` NATURAL JOIN `Visit Treatment` WHERE 1 order by Date";
     $result = $conn->query($sql);
     echo "<h4>Visits resulting in a Diagnosis</h4>";
 	echo "<table class='result-list'>";
@@ -51,7 +51,7 @@ else {
 		echo "</tr>";
 	endwhile;
 	echo "</table>";
-	$sql = "SELECT `Visit ID`, Date, Name FROM Visit NATURAL JOIN `Patient Visit` NATURAL JOIN `Patient` WHERE 1";
+	$sql = "SELECT `Visit ID`, Date, Name FROM Visit NATURAL JOIN `Patient Visit` NATURAL JOIN `Patient` WHERE 1 order by Date";
 	$result = $conn->query($sql);
     echo "<h4>Visits not resulting in a Diagnosis</h4>";
 	echo "<table class='result-list'>";
