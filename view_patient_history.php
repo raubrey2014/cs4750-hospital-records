@@ -48,7 +48,7 @@ if (isset($_REQUEST['SUBMIT'])){
             }
             echo "<h4>Results for patient $patient_name</h4>";
             echo "<table class='result-list'>";
-			echo "<tr><th>Visit ID</th><th>Date</th><th>Diagnosis</th><th>Treatment</th></tr>";
+			echo "<tr><th>Visit ID</th><th>Date</th><th>Diagnosis</th><th>Treatment</th><th>View Specialists</th></tr>";
         	$sql = "SELECT `Visit ID`, Date, Illness, `Treatment Name` FROM Patient NATURAL JOIN `Patient Visit` NATURAL JOIN Visit NATURAL LEFT JOIN `Visit Diagnosis` NATURAL LEFT JOIN `Visit Treatment` WHERE SSN = '$ssn'";
        		$result = $conn->query($sql);
         	while ($row = $result->fetch_assoc()) {
@@ -56,6 +56,8 @@ if (isset($_REQUEST['SUBMIT'])){
         		foreach($row as $key=>$value){
         			echo "<td>$value</td>";
         		}
+			$date = $row['Date'];
+			echo "<td><a href='specialists_on_visits.php?SUBMIT&PATIENT_SSN=$ssn&DATE=$date'><button type='submit' class='btn btn-primary'>View</button></a></td>";
         		echo "</tr>";
             }
             echo "</table>";
