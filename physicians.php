@@ -3,7 +3,62 @@ include 'login.php';
 validate_creds();
 include 'header.html';
 ?>
-<div class='content'>
+<h1>Add Physician</h1>
+<div id="container">
+<form role="form" class='form-inline'>
+<table>
+  <tr>
+    <td style='text-align: right;'><label for="Name">Physician Name:</label></td>
+    <td><input type="Name" class="form-control" id="Name" name="Name"></td>
+  </tr>
+  <tr>
+    <td style='text-align: right;'><label for="Spec">Specialization:</label></td>
+    <td><input id="Spec" name="Spec"></td>
+  </tr>
+  <tr>
+    <td style='text-align: right;'><label for="Salary">Salary:</label></td>
+    <td><input id="Salary" name="Salary"></td>
+  </tr>
+</table>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+<?php 
+
+if (isset($_REQUEST['Name']) && isset($_REQUEST['Spec']) && isset($_REQUEST['Salary'])){
+	create_physician();
+}
+
+function create_physician(){
+	$conn = new mysqli('stardock.cs.virginia.edu', 'cs4750igs3pw', 'fall2015','cs4750igs3pw');
+
+	if ($conn->connect_error) {
+
+        die("Connection failed: " . $conn->connect_error);
+
+	} else {
+		$name = $_REQUEST['Name'];
+		$spec = $_REQUEST['Spec'];
+		$salary = $_REQUEST['Salary'];
+		$sql = "SELECT count(*) as PhysCount FROM Physician";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		$count = $row['PhysCount'];
+		$sql = "INSERT INTO Physician (`Physician ID`, Name, Specialization, Salary) VALUES ($count, '$name', '$spec', $salary)";
+		$result = $conn->query($sql);
+		if ($result) {
+			echo "<h3>Physician successfully added.</h3>";
+		} else {
+			echo "<h2>Failed to add Physician: " . $conn->error . "</h2>";
+		}
+	}
+	
+	$conn->close();
+}
+
+?>
+
 <h1>Physicians</h1>
 <?php
 
@@ -35,5 +90,4 @@ else {
 	echo "</table>";
 }
 ?>
-</div>
 <?php include 'footer.html'; ?>
