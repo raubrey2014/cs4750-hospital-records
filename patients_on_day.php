@@ -50,8 +50,6 @@ else if (isset($_REQUEST['SUBMIT'])) {
 }
 ?>
 <br />
-<a href='index.html'>
-	Back
-</a>
+
 </div>
 <?php include 'footer.html'; ?>
