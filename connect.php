@@ -66,7 +66,7 @@ $conn->close();
 			<td><input type='text' name='ADDRESS' value='<?php echo $address; ?>' /></td>
 		</tr>
 	</table>
-	<input type='submit' />
+	<input type='submit' class='btn btn-primary' />
 </form>
 
 <?php } else { ?>
@@ -98,7 +98,7 @@ $conn->close();
 			<td><input type='text' name='ADDRESS' value='' /></td>
 		</tr>
 	</table>
-	<input type='submit' />
+	<input type='submit' class='btn btn-primary'/>
 </form>
 <?php } ?>
 

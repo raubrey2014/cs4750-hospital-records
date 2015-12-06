@@ -47,7 +47,7 @@ function create_treatment(){
      <td><textarea type="Name" class="form-control" id="Descr" name="Descr"></textarea></td>
     </tr>
   </table>
-  <input type="submit" class="btn btn-default" />
+  <input type="submit" class="btn btn-primary" />
 </form>
 </div>
 
