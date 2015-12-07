@@ -103,9 +103,6 @@ $conn->close();
 	<input type='submit' />
 </form>
 <?php } ?>
-<br />
-<a href='site_admin.html'>
-	Back
-</a>
+
 
 <?php include 'footer.html'; ?>
