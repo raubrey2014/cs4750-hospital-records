@@ -44,8 +44,6 @@ function create_diagnosis(){
 }
 
 ?>
-<a href='admin_main.php'>
-	Back
-</a>
+
 
 <?php include 'footer.html'; ?>
