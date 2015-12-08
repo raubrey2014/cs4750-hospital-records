@@ -42,12 +42,14 @@ else {
     $result = $conn->query($sql);
     echo "<h4>Visits resulting in a Diagnosis</h4>";
 	echo "<table class='result-list'>";
-	echo "<tr><th>Visit ID</th><th>Date</th><th>Patient Name</th><th>Diagnosis</th><th>Treatment</th></tr>"; 
+	echo "<tr><th>Visit ID</th><th>Date</th><th>Patient Name</th><th>Diagnosis</th><th>Treatment</th><th></th></tr>"; 
 	while ($row = $result->fetch_assoc()):
 		echo "<tr>";
 		foreach($row as $key=>$value){
 			echo "<td>$value</td>";
 		}
+		$visit_id = $row["Visit ID"];
+		echo "<td><a href='edit_visit.php?VISIT_ID=$visit_id'>Edit</a></td>";
 		echo "</tr>";
 	endwhile;
 	echo "</table>";
@@ -55,12 +57,14 @@ else {
 	$result = $conn->query($sql);
     echo "<h4>Visits not resulting in a Diagnosis</h4>";
 	echo "<table class='result-list'>";
-	echo "<tr><th>Visit ID</th><th>Date</th><th>Patient Name</th></tr>"; 
+	echo "<tr><th>Visit ID</th><th>Date</th><th>Patient Name</th><th></th></tr>"; 
 	while ($row = $result->fetch_assoc()):
 		echo "<tr>";
 		foreach($row as $key=>$value){
 			echo "<td>$value</td>";
 		}
+		$visit_id = $row["Visit ID"];
+		echo "<td><a href='edit_visit.php?VISIT_ID=$visit_id'>Edit</a></td>";
 		echo "</tr>";
 	endwhile;
 	echo "</table>";

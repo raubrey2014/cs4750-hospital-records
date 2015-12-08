@@ -24,16 +24,19 @@ else if (isset($_REQUEST['SUBMIT'])) {
 	$treatment = $_REQUEST['TREATMENT'];
 
 
-	$sql = "INSERT into `Physician Visit` VALUES ('$physician_id', '$visit_id')";
-	#; INSERT into `Visit Diagnosis` VALUES ('$visit_id', '$diagnosis'); INSERT into `Visit Treatment` VALUES ('$visit_id', '$treatment');";
-        $stmt = $conn->prepare($sql);
-	echo $conn->error;
-        #$stmt->bind_param('ddss', $visit_id, $physician_id, $diagnosis, $treatment);
-        if ($stmt->execute()) {
-                echo "<h2>Visit info successfully updated</h2>";
-        } else {
-                echo "<h2>Failed to update visit information: " . $conn->error . "</h2>";
-        }
+	$sql = "INSERT into `Physician Visit` VALUES ('$physician_id', '$visit_id'); ";
+	$sql.= "INSERT into `Visit Diagnosis` VALUES ('$visit_id', '$diagnosis'); "; 
+	$sql.= "INSERT into `Visit Treatment` VALUES ('$visit_id', '$treatment'); ";
+	if ($conn->multi_query($sql) == TRUE) {
+		#header("Location: visit.php");
+		echo "Visit info successfully updated.";
+	}
+	else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+
+	$conn->close();
+
 }
 
 ?>
@@ -44,7 +47,7 @@ else if (isset($_REQUEST['SUBMIT'])) {
         <table>
                 <tr>
                         <td style='text-align: right'>Visit ID:</td>
-                        <td><input type='text' name='VISIT_ID'  /></td>
+                        <td><input type='text' name='VISIT_ID' value=<?php echo $_REQUEST["VISIT_ID"] ?> /></td>
                 </tr>
                 <tr>
                         <td style='text-align: right'>Physician ID:</td>
@@ -63,7 +66,7 @@ else if (isset($_REQUEST['SUBMIT'])) {
 </form>
 
 
-<a href='admin_main.php'>
+<a href='visit.php'>
         Back
 </a>
 
