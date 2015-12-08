@@ -8,6 +8,7 @@ include 'header.html';
 <h2>Treatment/Diagnosis</h2>
 <ul>
 <li><a href="treatment_for_diagnosis.php"><span class="hidden-tablet">Treatment frequency for diagnosis Treatments</span></a></li>
+<li><a href="add_treatment_for_diagnosis.php"><span class="hidden-tablet">Add common treatment for diagnosis</span></a></li>
 </ul>
 
 <h2>Patient/Physician</h2>
