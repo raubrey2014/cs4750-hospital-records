@@ -18,7 +18,7 @@ else if (isset($_REQUEST['SUBMIT'])) {
 	//Physician, Physician visit, treatment, visit, visit diagnosis, visit treatment 
 	$name = $_SESSION['current_user'];
 	$pass = $_REQUEST['PASSWORD'];
-	$sql = "UPDATE PatientUser SET Password = ? WHERE Username = ?";
+	$sql = "UPDATE Patient SET Password = ? WHERE Email = ?";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('ss', $pass, $name);
 	if ($stmt->execute()) {

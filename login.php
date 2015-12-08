@@ -51,7 +51,7 @@ function check_user_login(){
     	die("Connection failed: " . $conn->connect_error);
     }
     else{
-  		$sql = "SELECT * from PatientUser WHERE Username='$username' AND Password='$password'";
+  		$sql = "SELECT SSN from Patient WHERE Email='$username' AND Password='$password'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0){
         	while($row = $result->fetch_assoc()):
