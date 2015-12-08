@@ -49,7 +49,7 @@ else {
 			echo "<td>$value</td>";
 		}
 		$visit_id = $row["Visit ID"];
-		echo "<td><a href='edit_visit.php?VISIT_ID=$visit_id'>Edit</a></td>";
+		echo "<td><a href='edit_visit.php?VISIT_ID=$visit_id'>Add</a></td>";
 		echo "</tr>";
 	endwhile;
 	echo "</table>";
